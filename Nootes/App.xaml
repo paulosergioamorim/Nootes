@@ -1,0 +1,22 @@
+﻿<Application x:Class="Nootes.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:viewModels="clr-namespace:Nootes.ViewModels"
+             xmlns:views="clr-namespace:Nootes.Views">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles/PlaceholderTextBox.xaml" />
+                <ResourceDictionary Source="Styles/DecorationButton.xaml" />
+                <ResourceDictionary Source="Styles/Button.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            
+            <DataTemplate DataType="{x:Type viewModels:HomeViewModel}">
+                <views:HomeView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModels:AddSubjectViewModel}">
+                <views:AddSubjectView />
+            </DataTemplate>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

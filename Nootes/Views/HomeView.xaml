@@ -1,0 +1,71 @@
+﻿<UserControl x:Class="Nootes.Views.HomeView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:viewModels="clr-namespace:Nootes.ViewModels"
+             mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance viewModels:HomeViewModel}">
+    <ScrollViewer VerticalScrollBarVisibility="Auto" Name="ScrollViewer">
+        <ScrollViewer.Triggers>
+            <EventTrigger RoutedEvent="Loaded">
+                <BeginStoryboard>
+                    <Storyboard>
+                        <DoubleAnimation
+                            Storyboard.TargetName="ScrollViewer"
+                            Storyboard.TargetProperty="Opacity"
+                            Duration="0:0:0.5"
+                            From="0"
+                            To="1" />
+                        <ThicknessAnimation
+                            Storyboard.TargetName="ScrollViewer"
+                            Storyboard.TargetProperty="Margin"
+                            Duration="0:0:0.5"
+                            From="0 50 0 0"
+                            To="0" />
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+        </ScrollViewer.Triggers>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <ListView Grid.Row="0" MaxWidth="400" Margin="50 0" Name="SubjectsListView"
+                      HorizontalContentAlignment="Stretch"
+                      ItemsSource="{Binding Subjects, UpdateSourceTrigger=PropertyChanged}">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="HorizontalAlignment" Value="Stretch" />
+                    </Style>
+                </ListView.ItemContainerStyle>
+                <ListView.View>
+                    <GridView>
+                        <GridView.ColumnHeaderContainerStyle>
+                            <Style TargetType="GridViewColumnHeader">
+                                <Setter Property="HorizontalAlignment" Value="Stretch" />
+                            </Style>
+                        </GridView.ColumnHeaderContainerStyle>
+                        <GridViewColumn Header="Title" DisplayMemberBinding="{Binding Title}" />
+                        <GridViewColumn Header="Teacher" DisplayMemberBinding="{Binding Teacher}" />
+                        <GridViewColumn Header="Note" DisplayMemberBinding="{Binding Note}" />
+                        <GridViewColumn Header="Approved" DisplayMemberBinding="{Binding IsApproved}" />
+                    </GridView>
+                </ListView.View>
+            </ListView>
+
+            <Button Grid.Row="1" Command="{Binding AddSubjectCommand}">
+                Add Subject
+            </Button>
+
+            <Button Grid.Row="2" Command="{Binding DropSubjectCommand}"
+                    CommandParameter="{Binding Path=SelectedItem, ElementName=SubjectsListView}">
+                Drop Subject
+            </Button>
+        </Grid>
+    </ScrollViewer>
+</UserControl>
