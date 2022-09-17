@@ -1,0 +1,64 @@
+<UserControl x:Class="Nootes.Views.AddSubjectView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:viewModels="clr-namespace:Nootes.ViewModels"
+             xmlns:components="clr-namespace:Nootes.Components"
+             mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance viewModels:AddSubjectViewModel}">
+    <Grid Margin="50 20" Name="Grid">
+        <Grid.Triggers>
+            <EventTrigger RoutedEvent="Loaded">
+                <BeginStoryboard>
+                    <Storyboard>
+                        <DoubleAnimation
+                            Storyboard.TargetName="Grid"
+                            Storyboard.TargetProperty="Opacity"
+                            Duration="0:0:0.5"
+                            From="0"
+                            To="1" />
+                        <ThicknessAnimation
+                            Storyboard.TargetName="Grid"
+                            Storyboard.TargetProperty="Margin"
+                            Duration="0:0:0.5"
+                            From="0 50 0 0"
+                            To="0" />
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+        </Grid.Triggers>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <components:PlaceholderTextBox Grid.Row="0" Margin="50 5" Placeholder="Title" Padding="10"
+                                       Background="DimGray"
+                                       Foreground="Azure"
+                                       BorderBrush="Transparent"
+                                       IsRequired="True"
+                                       Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}" />
+
+        <components:PlaceholderTextBox Grid.Row="1" Margin="50 5" Placeholder="Teacher" Padding="10"
+                                       Background="DimGray"
+                                       Foreground="Azure"
+                                       BorderBrush="Transparent"
+                                       Text="{Binding Teacher, UpdateSourceTrigger=PropertyChanged}" />
+
+        <components:PlaceholderTextBox Grid.Row="2" Margin="50 5" Placeholder="Note" Padding="10"
+                                       Background="DimGray"
+                                       Foreground="Azure"
+                                       BorderBrush="Transparent"
+                                       Text="{Binding Note, UpdateSourceTrigger=PropertyChanged}" />
+
+        <Button Grid.Row="3" Width="200" Command="{Binding SubmitCommand}">Submit</Button>
+
+        <Button Grid.Row="4" Width="200" Command="{Binding CancelCommand}">Cancel</Button>
+    </Grid>
+</UserControl>
